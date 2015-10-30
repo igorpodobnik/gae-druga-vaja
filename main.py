@@ -54,6 +54,43 @@ class MainHandler(BaseHandler):
 
         self.render_template("hello.html", params=params)
 
+class homeHandler(BaseHandler):
+    def get(self):
+        params = {"sporocilo": "Homepage"}
+
+        self.render_template("home.html", params=params)
+
+class mojiprojHandler(BaseHandler):
+    def get(self):
+        params = {"sporocilo": "Homepage"}
+
+        self.render_template("moji.html", params=params)
+
+class blogHandler(BaseHandler):
+    def get(self):
+        params = {"sporocilo": "Homepage"}
+
+        self.render_template("blog.html", params=params)
+
+class kontaktHandler(BaseHandler):
+    def get(self):
+        params = {"sporocilo": "Homepage"}
+
+        self.render_template("kontakt.html", params=params)
+
+class druzinaHandler(BaseHandler):
+    def get(self):
+        params = {"sporocilo": "Homepage"}
+
+        self.render_template("druzina.html", params=params)
+
+class omeniHandler(BaseHandler):
+    def get(self):
+        params = {"sporocilo": "O meni"}
+
+        self.render_template("omeni.html", params=params)
+
+
 class lotoHandler(BaseHandler):
     def get(self):
         cifre = loto(39,7)
@@ -72,4 +109,10 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
     webapp2.Route('/loto', lotoHandler),
     webapp2.Route('/time', timeHandler),
+    webapp2.Route('/home', homeHandler),
+    webapp2.Route('/home/omeni', omeniHandler),
+    webapp2.Route('/home/moji', mojiprojHandler),
+    webapp2.Route('/home/blog', blogHandler),
+    webapp2.Route('/home/kontakt', kontaktHandler),
+    webapp2.Route('/home/druzina', druzinaHandler),
 ], debug=True)
