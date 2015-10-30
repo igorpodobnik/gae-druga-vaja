@@ -3,10 +3,30 @@ import os
 import jinja2
 import webapp2
 import datetime
+import random
+
+
+
 
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
+
+def loto(maxstevilo,kolikokroglic):
+    rezultati = []
+    izrebanih = 0
+    while izrebanih < kolikokroglic:
+        #print i
+        #print kolikokroglic
+        #print maxstevilo
+        cifra = random.randrange(1,maxstevilo)
+        #print cifra
+        if cifra not in rezultati:
+            rezultati.append(cifra)
+            izrebanih +=1
+    rezultati.sort()
+    return rezultati
+
 
 
 class BaseHandler(webapp2.RequestHandler):
@@ -36,8 +56,9 @@ class MainHandler(BaseHandler):
 
 class lotoHandler(BaseHandler):
     def get(self):
-
-        return self.render_template("loto.html")
+        cifre = loto(39,7)
+        params = {"stevilke":cifre }
+        return self.render_template("loto.html", params=params)
 
 class timeHandler(BaseHandler):
     def get(self):
