@@ -2,6 +2,7 @@
 import os
 import jinja2
 import webapp2
+import datetime
 
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
@@ -29,8 +30,25 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        return self.render_template("hello.html")
+        params = {"sporocilo": "Glavna stran, izberite cas ali loto:"}
+
+        self.render_template("hello.html", params=params)
+
+class lotoHandler(BaseHandler):
+    def get(self):
+
+        return self.render_template("loto.html")
+
+class timeHandler(BaseHandler):
+    def get(self):
+
+        cas = datetime.datetime.now()
+        params = {"sporocilo": "Glavna stran, izberite cas ali loto:","time" : cas}
+
+        return self.render_template("time.html", params=params)
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
+    webapp2.Route('/loto', lotoHandler),
+    webapp2.Route('/time', timeHandler),
 ], debug=True)
